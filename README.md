@@ -3,13 +3,13 @@
 
 ### Concept
 
-__“Nebula is an AI/ML driven Consulting as a Service software solution venture given birth by joint efforts between IT D&A and EPG SIE engineers.  Focused on replacing consultants by leveraging software services-oriented architectures coded in C++, Java and/or C#, Big Data, BI, AI/ML, DPG, Ethernet & Edge Group’s Global Intel’s Network Distributed Grid, it’s capable of replacing biased and not-data-driven decisions @ Intel, due to years of relying exclusively on Legacy Consultants from well-known companies.  Our solution provides data-driven decisions based on optimal analysis of low-level metrics of a SW/HW product created to fulfil a business need. We’re looking for two or three folks for each of the technologies specified above; two or three hours a week per human resource will suffice for 6 months. Interested? Reach out to either Gur or myself.__
+_“Nebula is an AI/ML driven Consulting as a Service software solution venture given birth by joint efforts between IT D&A and EPG SIE engineers.  Focused on replacing consultants by leveraging software services-oriented architectures coded in C++, Java and/or C#, Big Data, BI, AI/ML, DPG, Ethernet & Edge Group’s Global Intel’s Network Distributed Grid, it’s capable of replacing biased and not-data-driven decisions @ Intel, due to years of relying exclusively on Legacy Consultants from well-known companies.  Our solution provides data-driven decisions based on optimal analysis of low-level metrics of a SW/HW product created to fulfil a business need. We’re looking for two or three folks for each of the technologies specified above; two or three hours a week per human resource will suffice for 6 months. Interested? Reach out to either Gur or myself.
 
-__Do you want to learn & apply the most innovative “on the edge” network distributed data structures such as Merkle Trees, Blockchains or Hash Graphs, are you passionate about Full & Partial Byzantine Consensus Algorithms, Gossip Protocols, Distributed Transaction Logs and how each of these data structures achieves a quorum in order to execute a transaction (i.e., add a new validated/legit block to the data structure in all the copies in all the distributed nodes). __
+_Do you want to learn & apply the most innovative “on the edge” network distributed data structures such as Merkle Trees, Blockchains or Hash Graphs, are you passionate about Full & Partial Byzantine Consensus Algorithms, Gossip Protocols, Distributed Transaction Logs and how each of these data structures achieves a quorum in order to execute a transaction (i.e., add a new validated/legit block to the data structure in all the copies in all the distributed nodes)._
 
-__You have a background in crypto/blockchain/consensus mechanisms? Are you passionate about improving connectivity solutions? 
+_You have a background in crypto/blockchain/consensus mechanisms? Are you passionate about improving connectivity solutions? 
 Our start-up venture involves networking on the edge of Web 3.0 & establishing 100% trust in a distributed environment. 
-Please do DM me/Gur if you are interested in joining. I'll be happy to share more details and have a discussion. Thanks” __
+Please do DM me/Gur if you are interested in joining. I'll be happy to share more details and have a discussion. Thanks”_
 
 
 ### Lifecycle Guidelines
