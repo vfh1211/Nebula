@@ -19,6 +19,15 @@ Three branches are used: _dev-main, qat-main, prod-main_
 * No merge occurs without code & architectural review
 * No push occurs without code & architectural
 
+### Steps to path to production
+
+1. Create feature branch as highlighted above **from prod-main branch**
+2. Perform your changes there in your "feature branch"
+3. Git checkout to dev-main after you're 100% to have working code
+4. Send a GitHub merge/code review request for discussion & approval
+5. Code will run in QAT for a specified timeframe (depending on the nature of the change and commitment during review)
+6. Once code proofs being stable in QAT environment, proceed to hand-out to the **Designated Release Owner** who'll perform the actual merge to _prod-main_ branch and deploy to Production HW.
+
 ### Conventions
 
 * CamelCase for public attributes
@@ -29,6 +38,7 @@ Three branches are used: _dev-main, qat-main, prod-main_
 ### Base Task List
 
 [X] - Get first customer on-board (**XCC - Custom Computing Group**)
+[X] - Create Teams Group - **Please join here: ** [Nebula]: https://teams.microsoft.com/l/team/19%3aW_vM_6CgKyZvFpfIDpaHZwxifcX0_EpXVWs4H7UMeAc1%40thread.tacv2/conversations?groupId=57b661b3-40f1-49a0-baf2-c3e93f4def8b&tenantId=46c98d88-e344-4ed4-8496-4ed7712e255d
 [ ] - Expand core team - **<em>WIP</em>**
 [ ] - Write the base interfaces 
 [ ] - Write the base virtual/abstract classes
