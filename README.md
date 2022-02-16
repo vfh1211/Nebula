@@ -52,22 +52,22 @@ Three branches are used: _dev-main, qat-main, prod-main_
 
 ##### Base Interfaces
 ```c#
-* IConfigurable
-* IService
-* INotifiable
-* ICloudable
-* IConsultingStepExecutable
-* IEngineIOReadable
-* IEngineIOSerializable
+* INebulaConfigurable
+* INebulaService
+* INebulaNotifiable
+* INebulaCloudable
+* INebulaConsultingStepExecutable
+* INebulaEngineIOReadable
+* INebulaEngineIOSerializable
 ```
 ##### Base Abstract & Virtual Classes
 ```c#
-* AbstractService
-* AbstractMessage
-* AbstractDirectory
-* AbstractBusinessProcess
-* AbstractIOMetric
-* AbstractIOOutput
+* AbstractNebulaService
+* AbstractNebulaMessage
+* AbstractNebulaDirectory
+* AbstractNebulaBusinessProcess
+* AbstractNebulaIOMetric
+* AbstractNebulaIOOutput
 ```
 
 ##### Bootstrap SOA Main Entry Point 
