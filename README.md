@@ -37,13 +37,13 @@ Three branches are used: _dev-main, qat-main, prod-main_
 
 ### Base Task List
 
-[X] - Get first customer on-board (**XCC - Custom Computing Group**)
-[X] - Create Teams Group - **Please join here: ** [Nebula]: https://teams.microsoft.com/l/team/19%3aW_vM_6CgKyZvFpfIDpaHZwxifcX0_EpXVWs4H7UMeAc1%40thread.tacv2/conversations?groupId=57b661b3-40f1-49a0-baf2-c3e93f4def8b&tenantId=46c98d88-e344-4ed4-8496-4ed7712e255d
-[ ] - Expand core team - **<em>WIP</em>**
-[ ] - Write the base interfaces 
-[ ] - Write the base virtual/abstract classes
-[ ] - Write the fist concrete class that implements both behaviour (classes) & attributes (class properties) to be able to bootstrap the **Analysis Agent**
-[ ] - Write the **Analysis Agent** bootstrap (main function) as a multithreaded _Chain of Command_ Design Pattern which wakes-up 24/7 the concrete implementation of the **I/O monitoring services**
+- [X] Get first customer on-board (**XCC - Custom Computing Group**)
+- [X] Create Teams Group - Please join here: [Nebula]: https://teams.microsoft.com/l/team/19%3aW_vM_6CgKyZvFpfIDpaHZwxifcX0_EpXVWs4H7UMeAc1%40thread.tacv2/conversations?groupId=57b661b3-40f1-49a0-baf2-c3e93f4def8b&tenantId=46c98d88-e344-4ed4-8496-4ed7712e255d
+- [ ] Expand core team - **<em>WIP</em>**
+- [ ] Write the base interfaces 
+- [ ] Write the base virtual/abstract classes
+- [ ] Write the fist concrete class that implements both behaviour (classes) & attributes (class properties) to be able to bootstrap the **Analysis Agent**
+- [ ] Write the **Analysis Agent** bootstrap (main function) as a multithreaded _Chain of Command_ Design Pattern which wakes-up 24/7 the concrete implementation of the **I/O monitoring services**
 
 
 ### Code Katas
