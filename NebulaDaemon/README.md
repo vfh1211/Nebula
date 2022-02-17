@@ -28,7 +28,7 @@ Please do DM me/Gur if you are interested in joining. I'll be happy to share mor
 9. Verify your email using the link sent after the account is created.
 10. Request access to 1Source Github User role in AGS.
 11. Accept the invitations to intel-innersource and intel-sandbox organizations.
-12. Request access to DCA ETL repository
+12. Request access to Nebula repository
 13. If you require Admin access request on AGS the following entitlement: ATS SCM ADMIN
 14. If you require Maintain (developer) access request on AGS the following entitlement: ATS SCM MAINTAIN
 15. Install Git tools and GIT LFS (if it has not being installed yet).
@@ -86,10 +86,10 @@ host github.com
 
 Pull **Nebula** Project Folders to Local Repository
 
-Follow these instructions to pull the DCA project files to your local repository:
+Follow these instructions to pull the Nebula project files to your local repository:
 
-37. Validate that you have access to DCA ETL GitHub repository intel-innersource/applications.analytics.data-collector-analyzer.etl
-38. Create or navigate to the folder where you want the DCA project code to exists
+37. Validate that you have access to Nebula GitHub repository intel-innersource/applications.analytics.data-collector-analyzer.etl
+38. Create or navigate to the folder where you want the Nebula project code to exists
 39. Run the following command:
 40. git clone git@github.com:intel-innersource/applications.analytics.data-collector-analyzer.etl.git
 41. If the previous command did not work, run the following command:
