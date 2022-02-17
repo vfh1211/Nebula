@@ -108,7 +108,7 @@ Follow these instructions to test that you are able to commit changes from your 
 52. git push origin >>idsid<<_test_branch
 53. Please proceed to destroy the test branch, Source Control MUST be kept clean
 ```
-53. In case of an issue, contact the Project Nebula team leads: [Flores, Vinicio]: vinicio.flores@intel.com **or** [Sannikov, Gur]: gur.sannikov@intel.com
+53. In case of an issue, contact the Project Nebula Solution Architect or Product Manager: **Flores, Vinicio**: vinicio.flores@intel.com or **Sannikov, Gur**: gur.sannikov@intel.com
 
 ### Lifecycle Guidelines
 
