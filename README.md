@@ -19,7 +19,7 @@ Three layered approach (but fully distributed among Intel's network grid)
 2. Core
 3. Storage
 
-![Ultra Fast Distributed Consensus Algorithm for IO readings!](Nebula Analysis Network Architecture.png "Architecture")
+![Ultra Fast Distributed Consensus Algorithm for IO readings!](./Nebula Analysis Network Architecture.png "Architecture")
 
 ## Setting up GitHub Environment
 
