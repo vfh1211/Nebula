@@ -51,5 +51,8 @@
     <Folder Include="Abstracts\IO\" />
     <Folder Include="Abstracts\Network\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Nebula Analysis Network Architecture.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

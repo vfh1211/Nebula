@@ -11,7 +11,15 @@ You have a background in crypto/blockchain/consensus mechanisms? Are you passion
 Our start-up venture involves networking on the edge of Web 3.0 & establishing 100% trust in a distributed environment. 
 Please do DM me/Gur if you are interested in joining. I'll be happy to share more details and have a discussion. Thanks”<em>
 
+### Architecture
 
+Three layered approach (but fully distributed among Intel's network grid)
+
+1. Distributed Agents
+2. Core
+3. Storage
+
+![Ultra Fast Distributed Consensus Algorithm for IO readings!](Nebula Analysis Network Architecture.png "Architecture")
 
 ## Setting up GitHub Environment
 
