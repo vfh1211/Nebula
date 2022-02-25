@@ -1,0 +1,275 @@
+Version 3.0.91
+Lantern Rock 3.0 RELEASE
+
+Contacts:
+henry.zhihui.zhang@intel.com
+joshua.boelter@intel.com
+
+===============================================================================
+Where to download?
+===============================================================================
+
+This release is officially available on Artifactory:
+https://ubit-artifactory-or.intel.com/artifactory/telemetry-local/LanternRockSDK3.0/
+(Need AGS entitlement:  DevTools - TeamCity - Production - telemetry - Project Viewer)
+
+Sharepoint access:
+https://intel.sharepoint.com/sites/VMSPFSFSEG14_LanternRock/Shared%20Documents/Forms/AllItems.aspx?viewid=991b0b63%2D4ac1%2D4838%2D9019%2D31be2a78f24b&id=%2Fsites%2FVMSPFSFSEG14%5FLanternRock%2FShared%20Documents%2F3%2E0
+
+Chocolatey packages (for Windows only):
+Install LR 3.0 chocolatey: choco install lanternrock3 -y
+https://ubit-artifactory-or.intel.com/artifactory/occ-nuget-local/
+
+Python wrapper and dependent native libraries can be installed via:
+python -m pip install lanternrock[==x.x.x.x] -i https://intelpypi.pdx.intel.com/pythonsv/production
+
+SDK symbols for windows:
+http://symbols.intel.com/LanternRock
+
+===============================================================================
+What's new in LR 3.0 SDK?
+===============================================================================
+
+With LR 3.0, Lantern Rock now is multi-OS(Windows, Linux, MacOS), multi-platform(all windows platforms and those with .netcore runtime support),
+multi-app-type(native, .netframework, .netcore, desktop/UWP, python), multi-data-classification(IC/ITS), and multi-network(external/internal/restricted).
+
+1. Native C/C++ APIs
+   a. Migrated the same C/C++ codebase to support Windows, Linux, and MacOS.
+   b. The APIs in SDK 3.0 are exactly the same as in SDK 2.2.
+   c. Compared to the uploader lrio.exe in SDK 2.2, its functionality has been moved into the SDK 3.0 .dll/.so/.dylib file (in-proc).
+   d. lrio still exists for backward compatibility.
+2. System consent removed and related API disabled. Applications are responsible to get user consent before using LR3.0 to collect telemetry data.
+3. The entire LR 3.0 SDK has become in-proc, the .dll/.so/.dylib is the only file needed for apps to use LR SDK 3.0.
+   On windows, installer msi/msm still exists for backward compatibility, but it is not required to be installed.
+4. To support .netcore and UWP apps, a new LR SDK implemented using .net standard is added for Windows, Ubuntu,and MacOS.
+5. The python wrapper lanternrock.py is supported on Windows, Linux, and MacOS.
+
+===============================================================================
+Distribution/Installation
+===============================================================================
+
+>> Distribution for native applications
+
+With LR SDK 3.0, all an app needs to run while using Lantern Rock is the dynamic library file (intel-ias3.dll for Windows, libintel-ias3.so for Linux, libintel-ias3.dylib for MacOS).
+When building the app, the static library files (*.lib for Windows and *.a for others) need to be linked with. For windows C/C++ apps, macro "HOST_WINDOWS" must be added as a preprocessor definition to compile.
+ 
+On Windows only, you may include the merge module (LanternRock.msm) in your product to install the SDK dependencies. This includes a scheduled task (lrio.exe) that will be installed in %programfiles%\Intel Telemetry 3.0\lrio.exe.
+The scheduled task is configured to run once per day to upload all telemetry data in a batch and your app doesn't need to invoke the Upload API.
+Your product must distribute the intel-ias3.dll dependency with your product (unless you have arranged other plans such as via LanternRock.msm). You may choose to bind automatically via the .libs or by dynamically loading the dll using ias3-dynamic.cpp.  We recommend the intel-ias3.lib route.
+
+>> Distribution for .NET applications
+
+Your product must distribute the PInvoke dll (Intel.Ias3-X.5.dll) choosing the appropriate framework for your product (3 or 4). If the merge module was used, the dependent intel-ias3.dll will have been installed under the installation folder and will get loaded dynamically by the PInvoke dll.  
+Optionally, applications may install the native dlls in a path x86\intel-ias3.dll and/or x64\intel-ias3.dll relative to the PInvoke dll.  In this case, local native dlls are loaded.  If your product is always 32 bit, you don't need the x64 dll. If your product is built as Any CPU, you should distribute both on 64 bit platforms.
+To prevent developers from forgetting to include Visual Studio C++ runtime redistributions in their deployment packages, we provide only the intel-ias3.dll that is already statically linked to CRT.
+
+>> Distribution for python applications
+
+Your product must distribute the python wrapper lanternrock/__init__.py and the native dynamic library (intel-ias3.dll for Windows, libintel-ias3.so for Linux, libintel-ias3.dylib for MacOS).
+The lanternrock folder should be in the same folder as your app while the native library is put under a subfolder of lanternrock specific to OS. The subfolder is x64 and/or x86 according to its bitness on Windows. The subfolder is mac on Mac OS and linux on Linux.
+On Windows only, if the SDK was installed using merged module, python wrapper will be able to locate the native dynamic library, so there is no need to distribute it locally with the app.
+
+To generate an app package using PyInstaller, make sure the LR dynamic library's source and destination are specified explicitly as in the following example so that app can locate it:
+	pyinstaller --add-binary 'lanternrock/ubuntu/libintel-ias3.so:lanternrock/ubuntu' iastest.py
+
+>> Distribution for .netstandard applications (.netcore, UWP, .netframework)
+
+Your application project must reference Intel.Ias-DotnetStandard.dll or add the nuget package Intel.Ias-DotnetStandard.3.0.x.nupkg.
+This .netstandard LR SDK can be used by .netcore, UWP and .netframework apps.  
+
+>> Chocolatey package (for Windows only)
+To download/install Lantern Rock 3.0 chocolatey package on windows system, chocolatey client must be installed and configured via the following command elevated:
+	@powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://github.intel.com/raw/tcase/chocolatey-packages/master/scripts/corporate_install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
+After that, you can run the following command to install:
+	choco install lanternrock3 -y
+
+===============================================================================
+Uploading
+===============================================================================
+
+Data is pushed to the cloud via the Upload API or (on Windows only) a scheduled task that is installed by the merge module.
+Applications should avoid invoking Upload API too often, especially in the cases of large device/user bases.  Recommended frequency is at most once per day to prevent from overwhelming LR backend.
+
+To trigger a push manually, you may run lrio from a command prompt or on windows from the scheduled task.
+
+Data will not be uploaded if:
+- the policy backoff value has not yet been met
+- the policy file was not fetched (expired or never fetched)
+- your device is using metered connection
+
+===============================================================================
+System Consent
+===============================================================================
+
+System consent removed and related API disabled. Applications are responsible to get user consent before using LR3.0 to collect telemetry data.
+
+===============================================================================
+Documentation
+===============================================================================
+
+Lantern Rock Portal
+https://analytics.intel.com/
+
+Lantern Rock Documentation
+https://wiki.ith.intel.com/display/lr/LanternRock
+
+Lantern Rock SDK SDLe:
+https://sdl-e.app.intel.com/project?id=7fe5cae6-6c93-4eb4-afdd-ac21f4df760f
+
+===============================================================================
+.ZIP Contents
+===============================================================================
+
+lanternrocksdk-win-3.0.x.zip  (LR 3.0 SDK for Windows)
+  dotnet\         .net wrapper
+    bin\          binaries
+    sample\       sample code for .net apps
+  installer\      windows installer msi and merged module msm
+  native\         native C/C++ SDK
+    bin\          binaries
+    include\      header files
+    sample\       sample code for c/c++ apps
+    sysprep\      sysprep dll
+    upload\       uploader lrio.exe
+  netstandard\    .netstandard SDK
+    bin\          binaries
+    sample\       sample code for using the .net standard SDK
+  python\         python wrapper
+    iastest.py    sample source code
+    lanternrock\  wrapper code and native library
+  trace\          trace tool trace.exe
+  
+lanternrocksdk-linux-3.0.x.zip  (LR 3.0 SDK for Linux)
+  native\         native C/C++ SDK
+    include\      header files
+    lib\          binaries
+    sample\       sample code for c/c++ apps
+    upload\       uploader lrio
+  netstandard\    .netstandard SDK
+    bin\          binaries
+    sample\       sample code for using the .net standard SDK
+  python\         python wrapper
+    iastest.py    sample source code
+    lanternrock\  wrapper code and native library
+	
+lanternrocksdk-macos-3.0.x.zip  (LR 3.0 SDK for MacOS)
+  native\         native C/C++ SDK
+    bin\          binaries
+    include\      header files
+    sample\       sample code for c/c++ apps
+    upload\       uploader lrio
+  netstandard\    .netstandard SDK
+    bin\          binaries
+    sample\       sample code for using the .net standard SDK
+  python\         python wrapper
+    iastest.py    sample source code
+    lanternrock\  wrapper code and native library
+
+===============================================================================
+Telemetry Storage
+===============================================================================
+
+You shouldn't need to touch this -- but if you want to poke around:
+
+Shared data is stored in 
+Windows: %programdata%\Intel Telemetry\
+non-Windows: ~/.LanternRock/Intel Telemetry/
+
+Application data is stored here if you don't specify a store folder
+Windows: %localappdata%\Intel Telemetry\<appname>\<telemetry id>\
+non-Windows: ~/.cache/Intel Telemetry/<appname>/<telemetry id>/
+
+===============================================================================
+Tracing
+===============================================================================
+
+Windows:
+  Run the trace.exe (elevated) utility included in the .zip to capture helpful trace output from the intel-ias3.dll, lrio.exe and PInvoke layer. A trace.txt file will be produced that is helpful if you need debug support.
+  If the trace tool crashes on startup, there's likely a hung trace session.  Launch compmgmt.msc and Navigate to Performance -> Data Collector Sets -> Event Trace Sessions.  Stop and Delete the 'Intel.NativeTraceConsole' session.  Quitting the trace console with 'q' will generally prevent this.
+
+non-Windows:
+  Set the logging method to file, console or both:
+    $ export LR_LOGGING_METHOD=FILE
+    $ export LR_LOGGING_METHOD=CONSOLE
+    $ export LR_LOGGING_METHOD=CONSOLE,FILE
+
+  Set logging levels:
+    $ export LR_LOGGING_LEVEL=INFO
+
+  Available levels:
+    NONE
+    CRITICAL
+    ERROR
+    WARN
+    INFO
+    TRACE
+    
+  Logs are located in the "~/.LanternRock/Log/" directory.
+
+===============================================================================
+Known Issues/Limitations
+===============================================================================
+
+- The default environment telemetry data collected by the .netstandard SDK is a subset of those from native SDK due to the sandbox nature of .netstandard libraries.
+- If the 32b and 64b merge module is installed on the same Windows system, two LRIO tasks will be created
+- Due to a potential bug in boost logger BOOST_LOG_STREAM_SEV, calling Initialize without Deinitialize will result in an abort on Linux when logging is enabled.
+- The minimum gcc/g++ compiler version required to build LR sdk 3.0 for Linux is 8.4.
+  libstdc++ version 6.0.27 was used for regular Linux build using g++ 9.2 on SELES11.4. Use gcc/g++ version 9.2 or newer to build your app.  If your system has older libstdc++ version installed, you need to take the libstdc++.so from LR package and set LD_PRELOAD environment variable pointing to it.
+  The linux static-legacy build is built with gcc/g++ version 8.4 and with libstdc++.so.6.0.25 on SELES11.4. It is located in <package-name>/native/lib/static-legacy/libintel-ias3.so. Apps can be built and linked with it using gcc/g++ version 7 or newer. 
+  Default libstdc++.so versions on are:
+    Ubuntu 20.04: libstdc++.so.6.0.28 
+    Ubuntu 18.04: libstdc++.so.6.0.25
+    Ubuntu 16.04: libstdc++.so.6.0.21
+    Debian 10 (buster): libstdc++.so.6.0.25
+    Debian 9 (stretch): libstdc++.so.6.0.22
+    Debian 8 (jessie):  libstdc++.so.6.0.20
+    RHEL 8.4: libstdc++.so.6.0.25
+    CentOS 8: libstdc++.so.6.0.25
+    CentOS 7: libstdc++.so.6.0.19
+    SLES 15 SP2: libstdc++.so.6.0.28
+    SLES 11 SP4: libstdc++.so.6.0.21
+
+===============================================================================
+Changelist
+===============================================================================
+3.0.71.0
+- LR 3.0 python wrapper made backward compatible with LR 2.2 native SDK
+- Chocolatey package on windows available to download/install
+- Sample code can be compiled using various versions of compilers (g++ 9.2, 8.3 and 7.4 on Linux, llvm/clang++ 8.0 on MacOS, VS2019 and VS2017 on Windows)
+3.0.72.0
+- updated imported libraries: Boost 1.73.0, openssl 1.1.1g and cpprestsdk 2.10.16
+- fixed incorrect build# in the native dll downloaded with the python wrapper from Intel pypi
+3.0.73.0
+- fixed crash due to logger is called in object destructors after the logger was released
+- fixed occaional "hung" trace session issue on trace tool startup
+3.0.76.0
+- fixed API signatures to be pure C compatible
+- added app-specific entity id (eid)
+3.0.77.0
+- added preempt option to uploader so that an new uploader instance can preempt an active upload session in another instance
+- removed connection check from uploader to reduce hits on router
+3.0.79.0
+- updated all 3rd-party libraries to the latest as of 01/2021
+- .netcore upgraded to use ver2.1
+- validated on win10x
+3.0.80.0
+- fixed the windows build merged module and msi that failed to install lrio as scheduled task
+3.0.82.0
+- updated openssl library to 1.1.1k
+- enabled control flow guard (/guard:cf) compiler setting for windows build
+- added dynamic folder for Linux builds that doesn't statically linked to 3rd-party libraries
+3.0.85.0
+- enforced absolute path for store folder
+- disabled symlink used for attachment filepath and store folder
+- disabled reference mode for AttachFile API
+- enforced attachment payload file must be in the same folder as the attachment metadata file
+- added collector/policy service cert verification on Linux/MacOS
+3.0.90.0
+- fixed proxy detection issue when local policy file is still valid
+- fixed lrio -selftest exception when sore root folder doesn't exist
+- fixed temp folder exception on WSL Linux
+- upgraded boost c++(1.77.0), IPP(2021.3.0), openssl(1.1.1l)
+- add "skip_cert_verify" environment variable
+3.0.91.0
+- fixed several KW scan warnings
+- Linux builds created on SLES11.4 with static/dynamic binaries by g++ 9.2 and static-legacy build by g++ 8.4.
